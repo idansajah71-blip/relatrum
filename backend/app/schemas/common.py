@@ -1,11 +1,24 @@
-"""Shared API schemas: response envelope and pagination."""
+"""Shared API schemas: response envelope, helpers and pagination."""
 from __future__ import annotations
 
 from typing import Any, Generic, TypeVar
 
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 T = TypeVar("T")
+
+
+def ok(data: Any, message: str = "OK", *, status_code: int = 200, meta: dict | None = None) -> JSONResponse:
+    """Standard success envelope: {success, message, data, meta}."""
+    payload: dict[str, Any] = {"success": True, "message": message, "data": data}
+    if meta:
+        payload["meta"] = meta
+    return JSONResponse(status_code=status_code, content=payload)
+
+
+def page_meta(total: int, limit: int, offset: int) -> dict:
+    return {"total": total, "limit": limit, "offset": offset}
 
 
 class PageMeta(BaseModel):
