@@ -4,28 +4,34 @@ RELATRUM is a modular monolith: a FastAPI backend with a Next.js frontend, desig
 
 ## System overview
 
-```mermaid
-flowchart LR
-    U[User] --> FE[Next.js Frontend]
-    FE --> API[FastAPI /api/v1]
-    API --> SVC[Service Layer]
-    SVC --> DB[(SQLite / PostgreSQL)]
-    SVC --> AI[AI Provider Adapter]
-    AI --> MOCK[Mock (default)]
-    AI --> GEMINI[Gemini (optional)]
-    AI --> GROQ[Groq (optional)]
+```
++------+     +------------------+     +------------------+
+| User | --> | Next.js Frontend | --> | FastAPI /api/v1  |
++------+     +------------------+     +--------+---------+
+                                                |
+                                                v
+                                     +----------+-----------+
+                                     |     Service Layer    |
+                                     +----+-----------+-----+
+                                          |           |
+                                          v           v
+                                +---------+--+  +-----+-----------+
+                                | SQLite/PG  |  | AI Provider     |
+                                +------------+  | Mock (default)  |
+                                                | Gemini / Groq   |
+                                                +-----------------+
 ```
 
 ## Backend layers
 
-```mermaid
-flowchart TB
-    API[app/api/v1 routers] --> CORE[app/core: security, permissions, exceptions]
-    API --> MODELS[app/models: 19 tables]
-    API --> SVC[app/services]
-    SVC --> AI[app/ai: provider interface]
-    SVC --> DB[app/database]
-    SVC --> UTILS[app/utils]
+```
+app/api/v1 routers
+   |----> app/core (security, permissions, exceptions)
+   |----> app/models (19 tables)
+   |----> app/services
+            |----> app/ai (provider interface)
+            |----> app/database
+            |----> app/utils
 ```
 
 ## Module responsibilities
@@ -52,28 +58,11 @@ flowchart TB
 
 ## Data flow
 
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant FE as Frontend
-    participant API as FastAPI
-    participant SVC as Services
-    participant DB as Database
-    U->>FE: Upload source
-    FE->>API: POST /sources
-    API->>SVC: ingest + extract text
-    SVC->>DB: source, version, evidence_spans
-    U->>FE: Extract statements
-    FE->>API: POST /sources/{id}/extract
-    API->>SVC: provider extraction + quote verification
-    SVC->>DB: statements + evidence links
-    U->>FE: Analyze
-    FE->>API: POST /cases/{id}/analyze
-    API->>SVC: retrieval + alignment + temporal + supersession
-    SVC->>DB: alignments, relations, findings, verification tasks
-    U->>FE: View report
-    FE->>API: GET /cases/{id}/reports
-```
+Data flow (step by step):
+1. User uploads source -> Frontend -> API POST /sources -> Services ingest + extract text -> DB (source, version, evidence_spans).
+2. User extracts statements -> API POST /sources/{id}/extract -> provider extraction + quote verification -> DB (statements + evidence links).
+3. User analyzes -> API POST /cases/{id}/analyze -> retrieval + alignment + temporal + supersession -> DB (alignments, relations, findings, verification tasks).
+4. User views report -> API GET /cases/{id}/reports.
 
 ## Domain model (core entities)
 
@@ -105,17 +94,9 @@ Findings carry `created_by_analysis_run` and `supersedes_finding_id` for history
 
 ## Provider architecture
 
-```mermaid
-classDiagram
-    class AIProvider {
-        +extract_statements(document_text, context)
-        +classify_alignment(requirement, observation)
-        +generate_verification_requests(finding, evidence)
-    }
-    AIProvider <|-- MockProvider
-    AIProvider <|-- GeminiProvider
-    AIProvider <|-- GroqProvider
-```
+AI provider interface:
+- AIProvider: extract_statements, classify_alignment, generate_verification_requests
+- MockProvider (default, offline), GeminiProvider, GroqProvider
 
 - Mock: deterministic, offline, no API key.
 - External providers: optional, configured via env, with retry/timeout.
