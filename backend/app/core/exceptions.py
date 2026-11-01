@@ -101,3 +101,13 @@ async def unhandled_error_handler(request: Request, exc: Exception) -> JSONRespo
     get_logger(__name__).exception("Unhandled error: %s", exc)
     message = "Internal server error." if request.app.state.app_env == "production" else f"Internal server error: {exc}"
     return error_response(status.HTTP_500_INTERNAL_SERVER_ERROR, message, "internal_error")
+
+
+def http_exception_handler(_: Request, exc) -> JSONResponse:
+    """Wrap framework HTTP errors (404 route not found, 405 method, ...) in the envelope."""
+    detail = str(getattr(exc, "detail", "Request failed."))
+    headers = getattr(exc, "headers", None) or {}
+    response = error_response(int(getattr(exc, "status_code", 500)), detail, "request_error")
+    if headers:
+        response.headers.update(headers)
+    return response

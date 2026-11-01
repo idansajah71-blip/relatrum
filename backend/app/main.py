@@ -5,7 +5,9 @@ import uuid
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request, Response
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.config import get_settings
 from app.core.exceptions import (
@@ -13,6 +15,7 @@ from app.core.exceptions import (
     api_error_handler,
     unhandled_error_handler,
     validation_error_handler,
+    http_exception_handler,
 )
 from app.core.logging import configure_logging, get_logger, request_id_var
 from app import database as db_mod
@@ -67,6 +70,8 @@ async def request_id_middleware(request: Request, call_next):
 
 
 app.add_exception_handler(ApiError, api_error_handler)
+app.add_exception_handler(RequestValidationError, validation_error_handler)
+app.add_exception_handler(StarletteHTTPException, http_exception_handler)
 app.add_exception_handler(Exception, unhandled_error_handler)
 
 
