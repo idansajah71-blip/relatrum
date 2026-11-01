@@ -431,6 +431,8 @@ Frontend: Next.js 16, React 19, TypeScript (strict), Tailwind CSS 4.
 
 AI: Mock (default, deterministic, offline), Gemini, Groq via provider interface.
 
+Icons: Lucide (MIT) for capability icons. Badges by shields.io. Header/footer by capsule-render.
+
 <p align="center">
   <img src="https://skillicons.dev/icons?i=python,fastapi,postgres,sqlite,nextjs,react,ts,tailwind,git,github" alt="Tech stack icons" />
 </p>
