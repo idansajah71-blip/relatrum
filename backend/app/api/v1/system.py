@@ -12,6 +12,31 @@ from typing import Any, Dict
 router = APIRouter()
 
 
+@router.get("/system/providers", operation_id="system_providers")
+def system_providers() -> Dict[str, Any]:
+    settings = get_settings()
+    configured = True
+    if settings.ai_provider == "gemini" and not settings.gemini_api_key:
+        configured = False
+    if settings.ai_provider == "groq" and not settings.groq_api_key:
+        configured = False
+    return {
+        "success": True,
+        "message": "Provider status.",
+        "data": {
+            "provider": settings.ai_provider,
+            "model": (
+                settings.gemini_model if settings.ai_provider == "gemini"
+                else settings.groq_model if settings.ai_provider == "groq"
+                else "deterministic-heuristics-v1"
+            ),
+            "configured": configured,
+            "mock_available": True,
+            "external_calls_enabled": settings.ai_provider != "mock",
+        },
+    }
+
+
 @router.get("/system/info", operation_id="system_info", response_model=Envelope)
 def system_info(db: Session = Depends(get_db)) -> Dict[str, Any]:
     settings = get_settings()
