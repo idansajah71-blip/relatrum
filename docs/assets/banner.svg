@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="RELATRUM banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  <circle cx="1050" cy="60" r="120" fill="#38bdf8" opacity="0.08"/>
+  <circle cx="150" cy="260" r="160" fill="#818cf8" opacity="0.06"/>
+  <rect x="60" y="120" width="6" height="60" fill="url(#accent)" rx="3"/>
+  <text x="84" y="155" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="64" font-weight="700" fill="#f8fafc">RELATRUM</text>
+  <text x="86" y="195" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="22" fill="#cbd5e1">Where expectations meet evidence.</text>
+  <text x="86" y="235" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="14" fill="#94a3b8">Evidence Intelligence Platform  |  Backend + Frontend  |  100 tests passing</text>
+  <rect x="60" y="255" width="1080" height="2" fill="url(#accent)" opacity="0.5"/>
+</svg>

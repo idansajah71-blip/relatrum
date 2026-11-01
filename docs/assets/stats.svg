@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" viewBox="0 0 800 200" role="img" aria-label="RELATRUM stats">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="200" rx="12" fill="url(#g)"/>
+  <g font-family="Segoe UI, Inter, Arial, sans-serif" text-anchor="middle">
+    <g transform="translate(133,0)">
+      <text y="90" font-size="44" font-weight="700" fill="#38bdf8">100</text>
+      <text y="125" font-size="14" fill="#94a3b8">Tests passing</text>
+    </g>
+    <g transform="translate(266,0)">
+      <text y="90" font-size="44" font-weight="700" fill="#818cf8">19</text>
+      <text y="125" font-size="14" fill="#94a3b8">DB tables</text>
+    </g>
+    <g transform="translate(400,0)">
+      <text y="90" font-size="44" font-weight="700" fill="#34d399">8</text>
+      <text y="125" font-size="14" fill="#94a3b8">Backend phases</text>
+    </g>
+    <g transform="translate(533,0)">
+      <text y="90" font-size="44" font-weight="700" fill="#fbbf24">4</text>
+      <text y="125" font-size="14" fill="#94a3b8">Frontend phases</text>
+    </g>
+    <g transform="translate(666,0)">
+      <text y="90" font-size="44" font-weight="700" fill="#f472b6">0</text>
+      <text y="125" font-size="14" fill="#94a3b8">API keys required</text>
+    </g>
+  </g>
+  <rect x="40" y="160" width="720" height="1" fill="#334155"/>
+  <text x="400" y="185" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">RELATRUM - Evidence Intelligence Platform</text>
+</svg>
