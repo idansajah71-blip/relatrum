@@ -26,19 +26,21 @@ RELATRUM is an evidence intelligence platform that turns fragmented organization
 
 ## Architecture
 
-```text
-Frontend (Next.js 16) --> FastAPI (Modular Monolith) --> SQLite/PostgreSQL
-                              - ingestion
-                              - extraction
-                              - alignment
-                              - findings
-                              - MRE
-                              - reporting
-                              |
-                       AI Provider: Mock (default) / Gemini / Groq
+```mermaid
+flowchart LR
+    U[User] --> FE[Next.js Frontend]
+    FE --> API[FastAPI /api/v1]
+    API --> SVC[Service Layer]
+    SVC --> DB[(SQLite / PostgreSQL)]
+    SVC --> AI[AI Provider Adapter]
+    AI --> MOCK[Mock (default)]
+    AI --> GEMINI[Gemini (optional)]
+    AI --> GROQ[Groq (optional)]
 ```
 
-See docs/architecture.md.
+The backend is a **modular monolith**: routers, services, models, and AI providers are separated by responsibility. Every analysis is reproducible (manifest hash, run metadata) and all findings are evidence-grounded.
+
+See the full [Architecture document](docs/architecture.md) for module responsibilities, data flow, tenancy, and deployment.
 
 ---
 
