@@ -4,7 +4,8 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
-from app.database import engine, get_db
+from app import database as db_mod
+from app.database import get_db
 from app.schemas.common import Envelope
 from typing import Any, Dict
 
@@ -14,10 +15,12 @@ router = APIRouter()
 @router.get("/system/info", operation_id="system_info", response_model=Envelope)
 def system_info(db: Session = Depends(get_db)) -> Dict[str, Any]:
     settings = get_settings()
+    engine = db_mod.engine
     db_backend = engine.url.get_backend_name() if engine is not None else "uninitialized"
+    db_storage_ready = engine is not None
     tables: int = 0
     try:
-        if db_backend == "sqlite":
+        if db_backend == "sqlite" and db_storage_ready:
             tables = db.execute(
                 text("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")
             ).scalar_one()

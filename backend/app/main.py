@@ -15,7 +15,7 @@ from app.core.exceptions import (
     validation_error_handler,
 )
 from app.core.logging import configure_logging, get_logger, request_id_var
-from app.database import create_all, init_engine, engine as db_engine
+from app import database as db_mod
 from app.api.v1.router import api_router
 
 
@@ -24,14 +24,14 @@ async def lifespan(app: FastAPI):
     settings = get_settings()
     configure_logging(settings.log_level)
     get_logger(__name__).info("Starting RELATRUM backend (env=%s)", settings.app_env)
-    init_engine(settings.database_url)
+    db_mod.init_engine(settings.database_url)
     if settings.app_env != "production":
-        create_all()  # quick-start convenience; Alembic is authoritative for production
+        db_mod.create_all()  # quick-start convenience; Alembic is authoritative for production
     app.state.app_env = settings.app_env
     yield
     get_logger(__name__).info("Shutting down RELATRUM backend")
-    if db_engine is not None:
-        db_engine.dispose()
+    if db_mod.engine is not None:
+        db_mod.engine.dispose()
 
 
 app = FastAPI(
@@ -78,7 +78,7 @@ def health_live() -> dict:
 @app.get("/health/ready", tags=["health"], operation_id="health_ready")
 def health_ready():
     settings = get_settings()
-    db_ok = db_engine is not None
+    db_ok = db_mod.engine is not None
     provider_ok = settings.ai_provider in ("mock",) or bool(
         settings.gemini_api_key if settings.ai_provider == "gemini" else settings.groq_api_key
     )

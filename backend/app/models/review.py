@@ -8,7 +8,9 @@ from app.database import Base, UTCDateTime, utcnow
 from app.models.base import UuidPkMixin
 
 
-class Review(Base, UuidPkMixin):    __tablename__ = "reviews"
+class Review(Base, UuidPkMixin):
+    """Append-only: review rows must never be updated or deleted."""
+    __tablename__ = "reviews"
     __table_args__ = (Index("ix_reviews_finding", "finding_id"),)
 
     finding_id: Mapped[str] = mapped_column(String(36), ForeignKey("findings.id", ondelete="CASCADE"), index=True, nullable=False)
@@ -18,6 +20,6 @@ class Review(Base, UuidPkMixin):    __tablename__ = "reviews"
     decision_rationale: Mapped[str | None] = mapped_column(Text)
     previous_status: Mapped[str | None] = mapped_column(String(30))
     new_status: Mapped[str] = mapped_column(String(30), nullable=False)
-    created_at = mapped_column(UTCDateTime(), default=utcnow)
+    created_at: Mapped[object] = mapped_column(UTCDateTime(), default=utcnow)
 
     finding = relationship("Finding", back_populates="reviews")

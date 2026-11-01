@@ -13,7 +13,7 @@ from typing import Any, Generator
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
-from sqlalchemy.types import TypeDecorator
+from sqlalchemy.types import Text, TypeDecorator
 
 
 def utcnow() -> datetime:
@@ -28,13 +28,8 @@ def new_uuid() -> str:
 class UTCDateTime(TypeDecorator):
     """ISO-8601 text storage of timezone-aware UTC datetimes (portable)."""
 
+    impl = Text
     cache_ok = True
-    impl = type_engine = None  # set in __init__ via Text
-
-    def __init__(self) -> None:
-        from sqlalchemy.types import Text
-
-        super().__init__(Text())
 
     def process_bind_param(self, value: datetime | None, dialect: Any) -> str | None:
         if value is None:
