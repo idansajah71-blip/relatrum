@@ -1,33 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" viewBox="0 0 800 200" role="img" aria-label="RELATRUM stats">
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="120" viewBox="0 0 860 120" role="img" aria-label="RELATRUM stats">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="0%" stop-color="#0b1220"/>
       <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
+    <style>
+      .card { fill: #111827; stroke: #1f2937; stroke-width: 1; rx: 10; }
+      .num { font-family: Segoe UI, Inter, Arial, sans-serif; font-size: 30px; font-weight: 700; text-anchor: middle; }
+      .lbl { font-family: Segoe UI, Inter, Arial, sans-serif; font-size: 11px; fill: #94a3b8; text-anchor: middle; }
+      .shimmer { animation: sh 3s linear infinite; }
+      @keyframes sh { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+      @media (prefers-reduced-motion: reduce) { .shimmer { animation: none; } }
+    </style>
   </defs>
-  <rect width="800" height="200" rx="12" fill="url(#g)"/>
-  <g font-family="Segoe UI, Inter, Arial, sans-serif" text-anchor="middle">
-    <g transform="translate(133,0)">
-      <text y="90" font-size="44" font-weight="700" fill="#38bdf8">100</text>
-      <text y="125" font-size="14" fill="#94a3b8">Tests passing</text>
-    </g>
-    <g transform="translate(266,0)">
-      <text y="90" font-size="44" font-weight="700" fill="#818cf8">19</text>
-      <text y="125" font-size="14" fill="#94a3b8">DB tables</text>
-    </g>
-    <g transform="translate(400,0)">
-      <text y="90" font-size="44" font-weight="700" fill="#34d399">8</text>
-      <text y="125" font-size="14" fill="#94a3b8">Backend phases</text>
-    </g>
-    <g transform="translate(533,0)">
-      <text y="90" font-size="44" font-weight="700" fill="#fbbf24">4</text>
-      <text y="125" font-size="14" fill="#94a3b8">Frontend phases</text>
-    </g>
-    <g transform="translate(666,0)">
-      <text y="90" font-size="44" font-weight="700" fill="#f472b6">0</text>
-      <text y="125" font-size="14" fill="#94a3b8">API keys required</text>
-    </g>
+  <rect width="860" height="120" rx="12" fill="url(#g)"/>
+  <g transform="translate(20,20)">
+    <rect class="card" width="150" height="80"/>
+    <text class="num shimmer" x="75" y="48" fill="#38bdf8">100</text>
+    <text class="lbl" x="75" y="68">Tests passing</text>
   </g>
-  <rect x="40" y="160" width="720" height="1" fill="#334155"/>
-  <text x="400" y="185" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">RELATRUM - Evidence Intelligence Platform</text>
+  <g transform="translate(190,20)">
+    <rect class="card" width="150" height="80"/>
+    <text class="num shimmer" x="75" y="48" fill="#818cf8" style="animation-delay:0.3s">19</text>
+    <text class="lbl" x="75" y="68">DB tables</text>
+  </g>
+  <g transform="translate(360,20)">
+    <rect class="card" width="150" height="80"/>
+    <text class="num shimmer" x="75" y="48" fill="#34d399" style="animation-delay:0.6s">8</text>
+    <text class="lbl" x="75" y="68">Backend phases</text>
+  </g>
+  <g transform="translate(530,20)">
+    <rect class="card" width="150" height="80"/>
+    <text class="num shimmer" x="75" y="48" fill="#fbbf24" style="animation-delay:0.9s">4</text>
+    <text class="lbl" x="75" y="68">Frontend phases</text>
+  </g>
+  <g transform="translate(700,20)">
+    <rect class="card" width="140" height="80"/>
+    <text class="num shimmer" x="70" y="48" fill="#f472b6" style="animation-delay:1.2s">0</text>
+    <text class="lbl" x="70" y="68">API keys required</text>
+  </g>
 </svg>

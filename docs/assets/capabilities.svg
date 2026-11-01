@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-label="RELATRUM capabilities">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <style>
+      .card { fill: #0f172a; stroke: #1f2937; stroke-width: 1; rx: 10; }
+      .title { font-family: Segoe UI, Inter, Arial, sans-serif; font-size: 13px; font-weight: 600; fill: #e2e8f0; }
+      .desc { font-family: Segoe UI, Inter, Arial, sans-serif; font-size: 10px; fill: #94a3b8; }
+      .icon { fill: none; stroke: #38bdf8; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .shimmer { animation: sh 4s ease-in-out infinite; }
+      @keyframes sh { 0%,100% { stroke-opacity: 0.7; } 50% { stroke-opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { .shimmer { animation: none; } }
+    </style>
+  </defs>
+  <rect width="900" height="360" rx="12" fill="url(#bg)"/>
+  <!-- row 1 -->
+  <g transform="translate(20,20)">
+    <rect class="card" width="205" height="150"/>
+    <g class="shimmer" transform="translate(92,38)">
+      <circle class="icon" cx="0" cy="0" r="12"/>
+      <path class="icon" d="M-8,-8 L8,8 M8,-8 L-8,8"/>
+    </g>
+    <text class="title" x="102" y="80" text-anchor="middle">Bidirectional alignment</text>
+    <text class="desc" x="102" y="100" text-anchor="middle">Requirement to observation</text>
+    <text class="desc" x="102" y="114" text-anchor="middle">and reverse</text>
+  </g>
+  <g transform="translate(245,20)">
+    <rect class="card" width="205" height="150"/>
+    <g class="shimmer" transform="translate(92,38)" style="animation-delay:0.3s">
+      <circle class="icon" cx="0" cy="0" r="12"/>
+      <path class="icon" d="M-6,0 L6,0 M0,-6 L0,6"/>
+    </g>
+    <text class="title" x="102" y="80" text-anchor="middle">Temporal reasoning</text>
+    <text class="desc" x="102" y="100" text-anchor="middle">Effective dates, overlap</text>
+    <text class="desc" x="102" y="114" text-anchor="middle">supersession</text>
+  </g>
+  <g transform="translate(470,20)">
+    <rect class="card" width="205" height="150"/>
+    <g class="shimmer" transform="translate(92,38)" style="animation-delay:0.6s">
+      <path class="icon" d="M-10,-6 L0,6 L10,-6"/>
+      <path class="icon" d="M-10,6 L0,-6 L10,6"/>
+    </g>
+    <text class="title" x="102" y="80" text-anchor="middle">Counter-evidence</text>
+    <text class="desc" x="102" y="100" text-anchor="middle">Conflicting evidence</text>
+    <text class="desc" x="102" y="114" text-anchor="middle">preserved</text>
+  </g>
+  <g transform="translate(695,20)">
+    <rect class="card" width="185" height="150"/>
+    <g class="shimmer" transform="translate(92,38)" style="animation-delay:0.9s">
+      <rect class="icon" x="-10" y="-10" width="20" height="20" rx="3"/>
+      <path class="icon" d="M-6,0 L6,0"/>
+    </g>
+    <text class="title" x="92" y="80" text-anchor="middle">Finding dossiers</text>
+    <text class="desc" x="92" y="100" text-anchor="middle">Evidence with polarity</text>
+    <text class="desc" x="92" y="114" text-anchor="middle">and review history</text>
+  </g>
+  <!-- row 2 -->
+  <g transform="translate(20,190)">
+    <rect class="card" width="205" height="150"/>
+    <g class="shimmer" transform="translate(92,38)" style="animation-delay:1.2s">
+      <path class="icon" d="M-10,0 L10,0 M0,-10 L0,10"/>
+      <circle class="icon" cx="0" cy="0" r="12"/>
+    </g>
+    <text class="title" x="102" y="80" text-anchor="middle">MRE</text>
+    <text class="desc" x="102" y="100" text-anchor="middle">Verification tasks</text>
+    <text class="desc" x="102" y="114" text-anchor="middle">and responses</text>
+  </g>
+  <g transform="translate(245,190)">
+    <rect class="card" width="205" height="150"/>
+    <g class="shimmer" transform="translate(92,38)" style="animation-delay:1.5s">
+      <path class="icon" d="M-10,-8 L10,-8 M-10,0 L10,0 M-10,8 L10,8"/>
+    </g>
+    <text class="title" x="102" y="80" text-anchor="middle">Reports and graph</text>
+    <text class="desc" x="102" y="100" text-anchor="middle">JSON, Markdown</text>
+    <text class="desc" x="102" y="114" text-anchor="middle">evidence graph</text>
+  </g>
+  <g transform="translate(470,190)">
+    <rect class="card" width="205" height="150"/>
+    <g class="shimmer" transform="translate(92,38)" style="animation-delay:1.8s">
+      <path class="icon" d="M-8,-8 L8,8 M8,-8 L-8,8 M0,-12 L0,12"/>
+    </g>
+    <text class="title" x="102" y="80" text-anchor="middle">Multi-tenant RBAC</text>
+    <text class="desc" x="102" y="100" text-anchor="middle">Workspaces, roles</text>
+    <text class="desc" x="102" y="114" text-anchor="middle">isolation</text>
+  </g>
+  <g transform="translate(695,190)">
+    <rect class="card" width="185" height="150"/>
+    <g class="shimmer" transform="translate(92,38)" style="animation-delay:2.1s">
+      <circle class="icon" cx="0" cy="0" r="12"/>
+      <path class="icon" d="M-6,-4 L6,-4 M-6,4 L6,4"/>
+    </g>
+    <text class="title" x="92" y="80" text-anchor="middle">Offline mock</text>
+    <text class="desc" x="92" y="100" text-anchor="middle">No API key</text>
+    <text class="desc" x="92" y="114" text-anchor="middle">deterministic</text>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="40" viewBox="0 0 900 40" role="img" aria-label="divider">
+  <defs>
+    <linearGradient id="d" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0"/>
+    </linearGradient>
+    <style>
+      .line { stroke: url(#d); stroke-width: 2; fill: none; stroke-dasharray: 8 8; animation: flow 3s linear infinite; }
+      @keyframes flow { to { stroke-dashoffset: -16; } }
+      @media (prefers-reduced-motion: reduce) { .line { animation: none; } }
+    </style>
+  </defs>
+  <rect width="900" height="40" fill="transparent"/>
+  <path class="line" d="M0 20 Q 225 5, 450 20 T 900 20"/>
+</svg>
