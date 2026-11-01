@@ -29,7 +29,7 @@ export default function CaseDetail() {
     } catch (e: any) { setMsg(e.message); }
   }
 
-  useEffect(() => { if (caseId) void load(); }, [caseId]); // eslint-disable-line react-hooks/set-state-in-effect
+  useEffect(() => { if (caseId) void load(); }, [caseId]); // eslint-disable-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
 
   async function uploadText() {
     if (!text.trim()) return;
