@@ -198,27 +198,9 @@ RELATRUM's signature interaction is **Minimum Resolving Evidence**: when evidenc
 
 <img src="docs/assets/animated-architecture.svg" alt="Animated architecture" width="100%">
 
-```
-+------+     +------------------+     +------------------+
-| User | --> | Next.js Frontend | --> | FastAPI /api/v1  |
-+------+     +------------------+     +--------+---------+
-                                                |
-                                                v
-                                     +----------+-----------+
-                                     |     Service Layer    |
-                                     +----+-----------+-----+
-                                          |           |
-                                          v           v
-                                +---------+--+  +-----+-----------+
-                                | SQLite/PG  |  | AI Provider     |
-                                +------------+  | Mock (default)  |
-                                                | Gemini / Groq   |
-                                                +-----------------+
-```
-
 The backend is a modular monolith: routers, services, models, and AI providers are separated by responsibility. Every analysis is reproducible (manifest hash, run metadata) and all findings are evidence-grounded.
 
-See the full [Architecture document](docs/architecture.md).
+See the full [Architecture document](docs/architecture.md) for module responsibilities, data flow, tenancy, and deployment.
 
 <br>
 
