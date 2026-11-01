@@ -1,22 +1,18 @@
 # RELATRUM Backend
 
-Evidence Intelligence Platform — backend (FastAPI).
+Evidence Intelligence Platform — FastAPI backend.
 
-## Features (implemented)
-- Workspaces, cases, source ingestion (TXT/PDF/DOCX/CSV/manual text) with provenance and evidence spans.
-- Atomic statement extraction (mock provider deterministic; Gemini/Groq optional).
-- Alignment engine (TF-IDF + fuzzy + temporal reasoning) with bidirectional absence detection.
-- Finding dossiers with evidence polarity and review history.
-- Minimum Resolving Evidence (MRE) verification tasks and responses.
-- Reporting (JSON/Markdown) and evidence graph.
-- Mock mode works with no API key (`AI_PROVIDER=mock`).
+## Overview
+RELATRUM turns fragmented organizational information into a structured, traceable, time-aware evidence system. The backend exposes a REST API for workspaces, cases, source ingestion, statement extraction, alignment, findings, verification, reporting, and graph.
 
-## Prerequisites
-- Python 3.11+
-- PostgreSQL not required for dev (SQLite default).
+## Tech stack
+- Python 3.11+, FastAPI, Pydantic v2
+- SQLAlchemy 2.x, Alembic, SQLite (Postgres-portable)
+- scikit-learn, RapidFuzz for candidate retrieval
+- Providers: Mock (default), Gemini, Groq
 
 ## Setup
-```
+```bash
 cd backend
 python -m venv .venv
 .venv\Scripts\activate
@@ -25,22 +21,43 @@ copy .env.example .env
 ```
 
 ## Run
-```
+```bash
 python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
-OpenAPI: http://localhost:8000/docs
+- OpenAPI: http://localhost:8000/docs
+- Health: http://localhost:8000/health/ready
+
+## Configuration (.env)
+```
+APP_ENV=development
+DATABASE_URL=sqlite:///./relatrum.db
+AI_PROVIDER=mock
+GEMINI_API_KEY=
+GROQ_API_KEY=
+MAX_UPLOAD_MB=10
+```
 
 ## Tests
-```
+```bash
 python -m pytest
 ```
-Current: 100 passed.
+Current result: 100 passed.
 
-## AI providers
-- `AI_PROVIDER=mock` (default, deterministic, offline).
-- Gemini/Groq optional via env keys; never exposed to frontend.
+## API surface
+- `/api/v1/workspaces`, `/cases`
+- `/api/v1/cases/{id}/sources`, `/sources/{id}/extract`
+- `/api/v1/cases/{id}/statements`
+- `/api/v1/cases/{id}/analyze`, `/alignments`, `/analysis-runs/{id}`
+- `/api/v1/cases/{id}/findings`, `/findings/{id}/...`
+- `/api/v1/findings/{id}/verification`, `/verification/{id}/...`
+- `/api/v1/cases/{id}/reports`, `/graph`, `/verification-queue`
+- `/api/v1/system/info`, `/system/providers`
+
+## Database
+- 19 normalized tables, UUID PKs, FK enforcement, Alembic migrations.
+- See [data dictionary](../docs/data-dictionary.md).
 
 ## Known limitations
-- MRE uses rule-based templates, not statistically optimized.
-- Embeddings (sentence-transformers) disabled by default.
-- No frontend yet (backend-first).
+- MRE uses rule-based templates (not statistically optimized).
+- Local embeddings disabled by default.
+- Frontend is a vertical slice.
